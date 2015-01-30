@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <script src="js/jquery-2.1.3.min.js"></script>
+        <script src="js/createjs-2014.12.12.min.js"></script>
+        <script src="js/data.js"></script>
+        <script src="js/creacion.js"></script>
+        <script src="js/teclado.js"></script>
+        <script src="js/colisiones.js"></script>
+        <script src="js/funciones.js"></script>
+        <title>Prueba juego</title>
+        <script>
+            // loop gamer
+            creaSonidos();
+            function tick(event) {
+                if (jnGlobal.jnPersonaje.boolEstado) {
+                    jnGlobal.jnPersonaje.boolColisionX = hayColisionX(jnGlobal.jnPersonaje);
+                    jnGlobal.jnPersonaje.boolColisionY = hayColisionY(jnGlobal.jnPersonaje);
+                    moverSalto();
+                    mover_caida();
+                    moverEscalada();
+                    moverBajada();
+                    moverDerecha();
+                    moverIzquierda();
+                    moveCosas();
+                    movimientoTrasporte();
+                    moverEnemigos();
+                    moverCaidaEnemigos();
+                    movimientoCamara();
+                    moverBalas();
+                    optimizar();
+                    ultimos_datos();
+                    cogerMoneda(jnGlobal.jnPersonaje);
+                    cogerParteNave(jnGlobal.jnPersonaje);
+                    actualizaPuntaje();
+                    actualizaBalas();
+                    evaluaEstadoBala();
+                    ganarPartida();
+                    moverGranja();
+                    ataqueEnemigo();
+                    caidaAgujero();
+                    jnGlobal.jnEtapa.update(event);
+                } else {
+                    event.remove();
+                    hacerInvisibleEntidades();
+                    comienzo();
+                }
+            }
+
+            window.addEventListener('resize', resize, false);
+            function resize() {
+                $("#canvas").width($("#containerCanvas").width());
+            }
+            resize();
+        </script>
+    </head>
+    <body onLoad="comienzo()">
+        <div id="containerCanvas" align="center">
+            <canvas id="canvas" style="max-width: 1000px; border-radius: 15px" width="1000" height="358">
+            </canvas>
+        </div>
+    </body>
+</html>
